@@ -2,38 +2,12 @@ Answer No-1
 
 
 #!/bin/bash
-
-function file_info {
-for file in "$@"; do
-if [ -f "$file" ]; 
-then
-echo "$file is a regular file."
-elif [ -d "$file" ]; then
-echo "$file is a directory."
-else
-echo "$file is another type of file."
-fi
-ls -l "$file"
-done
+function file_count()
+{
+local NUMBER_OF_FILE=$(ls -l | wc -l)
+echo "$NUMBER_OF_FILE"
 }
-
-function file_count {
-local count=0
-for file in "$@"; do
-if [ -f "$file" ]; 
-then
-((count++))
-fi
-done
-echo "Number of regular files: $count"
-}
-
-if [ $# -eq 0 ]; then
-echo "Please provide the name of a file or directory as argument."
-else
-file_info "$@"
-file_count "$@"
-fi
+file_count
 
 ######################################################################################
 
