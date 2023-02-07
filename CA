@@ -1,0 +1,80 @@
+Answer No-1
+
+
+#!/bin/bash
+
+function file_info {
+for file in "$@"; do
+if [ -f "$file" ]; 
+then
+echo "$file is a regular file."
+elif [ -d "$file" ]; then
+echo "$file is a directory."
+else
+echo "$file is another type of file."
+fi
+ls -l "$file"
+done
+}
+
+function file_count {
+local count=0
+for file in "$@"; do
+if [ -f "$file" ]; 
+then
+((count++))
+fi
+done
+echo "Number of regular files: $count"
+}
+
+if [ $# -eq 0 ]; then
+echo "Please provide the name of a file or directory as argument."
+else
+file_info "$@"
+file_count "$@"
+fi
+
+######################################################################################
+
+Answere No-2
+
+find -inname "myfile.txt"
+
+
+#########################################################################################
+
+Answere No-3
+
+
+#!/bin/bash
+
+# Check if directory name is provided through command-line
+if [ $# -eq 0 ]; then
+echo "ERROR: Please provide directory name as an argument."
+exit 1
+fi
+
+# Assign directory name to a variable
+dir_name=$1
+
+# Check if directory exists
+if [ ! -d "$dir_name" ]; then
+echo "ERROR: Directory does not exist."
+exit 1
+fi
+
+# Remove all permissions for groups and others
+chmod o-rwx,g-rwx $dir_name
+
+# Add all permissions for user
+chmod u+rwx $dir_name
+
+# Confirm permissions have been set
+ls -ld $dir_name
+
+
+
+
+
+
